@@ -22,9 +22,12 @@ export class LoginFile {
             this.page.getByText('Sorry, this user has been locked out.')
         ).toBeVisible();
     }
-    async expectInvalidCreds(): Promise<void> {
+    async nonExistentUserLoggedIn(): Promise<void> {
         await expect(
-            this.page.getByText('Username and password do not match')
+            this.page.getByText('Epic sadface: Username and password do not match any user in this service')
         ).toBeVisible();
+    }
+    async closeErrorButton() : Promise<void> {
+        await this.page.locator('[data-test="error-button"]').click();
     }
 }
