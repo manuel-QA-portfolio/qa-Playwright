@@ -1,0 +1,30 @@
+{
+  "name": "qa-playwright",
+  "version": "1.0.0",
+  "description": "Repository to upload Playwright tests and code",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "report": "playwright show-report"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/manuel-QA-portfolio/qa-Playwright.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/manuel-QA-portfolio/qa-Playwright/issues"
+  },
+  "homepage": "https://github.com/manuel-QA-portfolio/qa-Playwright#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.55.0",
+    "prettier": "^3.6.2"
+  }
+}
