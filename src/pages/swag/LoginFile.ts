@@ -30,4 +30,8 @@ export class LoginFile {
     async closeErrorButton() : Promise<void> {
         await this.page.locator('[data-test="error-button"]').click();
     }
+    async logoutButton() : Promise<void>{
+        await this.page.getByRole('button', {name: 'Open Menu'}).click();
+        await this.page.locator('#logout_sidebar_link').click();
+    }
 }

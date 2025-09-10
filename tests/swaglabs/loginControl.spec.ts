@@ -30,4 +30,8 @@ test.describe('Login control', () => {
         await accessLoginPage.login('visual_user', 'secret_sauce');
         await expect(page.getByText('Products')).toBeVisible();
     })
+    test('User can successfully logout', async ({ successfulLogin, page }) => {
+        await successfulLogin.logoutButton();
+        await expect(page.getByPlaceholder('Username')).toBeVisible();
+    })
 })
