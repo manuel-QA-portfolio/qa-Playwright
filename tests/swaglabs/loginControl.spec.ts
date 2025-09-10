@@ -1,5 +1,4 @@
-import { test, expect } from '@playwright/test';
-import { LoginFile } from '../../src/pages/swag/LoginFile';
+import { test, expect } from '../swaglabs/fixtures/login.fixture';
 
 
 test.describe('Login control', () => {
@@ -9,33 +8,26 @@ test.describe('Login control', () => {
         await expect(page.getByText('Swag Labs')).toBeVisible();
     })
 
-    test('Login successful', async ({ page }) => {
-        const loginFile = new LoginFile(page);
-        await loginFile.open();
-        await loginFile.login('standard_user', 'secret_sauce');
+    test('Login successful', async ({ accessLoginPage, page }) => {
+        await accessLoginPage.login('standard_user', 'secret_sauce');
+        await expect(page.getByText('Products')).toBeVisible();
     })
 
-    test('Locked user is not able to perform login', async ({ page }) => {
-        const loginFile = new LoginFile(page);
-        await loginFile.open();
-        await loginFile.login('locked_out_user', 'secret_sauce');
-        await loginFile.lockedUserMessage();
+    test('Locked user is not able to perform login', async ({ accessLoginPage, page }) => {
+        await accessLoginPage.login('locked_out_user', 'secret_sauce');
+        await accessLoginPage.expectedLockedMessage();
     })
 
-    test('Non existent user cannot login', async ({ page }) => {
-        const loginFile = new LoginFile(page);
-        await loginFile.open();
-        await loginFile.login('problem_user', '_sauce');
-        await loginFile.nonExistentUserLoggedIn();
+    test('Non existent user cannot login', async ({ accessLoginPage, page }) => {
+        await accessLoginPage.login('problem_user', '_sauce');
+        await accessLoginPage.expectedNonExistentUser();
     })
 
-    test('User is able to login after error', async ({ page }) => {
-        const loginFile = new LoginFile(page);
-        await loginFile.open();
-        await loginFile.login('problem_user', '_sauce');
-        await loginFile.nonExistentUserLoggedIn();
-        await loginFile.closeErrorButton();
-        await loginFile.login('visual_user', 'secret_sauce');
-
+    test('User is able to login after error', async ({ accessLoginPage, page }) => {
+        await accessLoginPage.login('problem_user', '_sauce');
+        await accessLoginPage.expectedNonExistentUser();
+        await accessLoginPage.closeErrorButton();
+        await accessLoginPage.login('visual_user', 'secret_sauce');
+        await expect(page.getByText('Products')).toBeVisible();
     })
 })
