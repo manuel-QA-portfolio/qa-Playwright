@@ -1,10 +1,9 @@
 import { test, expect } from '../swaglabs/fixtures/login.fixture';
 
 
-test.describe('Login control', () => {
-
-    test('Access', async ({ page }) => {
-        await page.goto('/');
+test.describe('Login control', { tag: '@login' }, () => {
+    test('Access', async ({ accessLoginPage, page }) => {
+        await accessLoginPage.open();
         await expect(page.getByText('Swag Labs')).toBeVisible();
     })
 
