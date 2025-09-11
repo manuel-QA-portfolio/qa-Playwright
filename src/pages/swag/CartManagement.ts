@@ -1,4 +1,4 @@
-import { Page, expect } from '@playwright/test';
+import { Locator, Page, expect } from '@playwright/test';
 
 export class CartManagement {
     private readonly page: Page;
@@ -7,31 +7,21 @@ export class CartManagement {
         this.page = page;
     }
 
-    async open(): Promise<void> {
-        await this.page.goto('/');
+    async cartOverview(): Promise<void> {
+        await this.page.locator('a[data-test="shopping-cart-link"]').click();
+        await this.page.locator('button[data-test="checkout"]').waitFor({ state: 'visible' });
     }
-
-    async login(user: string, pass: string): Promise<void> {
-        await this.page.getByPlaceholder("Username").fill(user);
-        await this.page.getByPlaceholder("Password").fill(pass);
-        await this.page.getByRole('button', { name: 'Login' }).click();
+    async backShoppingButton(): Promise<void> {
+        await this.page.locator('a[data-test="shopping-cart-link"]').click();
+        await this.page.getByRole('button', {name: 'Continue Shopping'}).click();
     }
-
-    async expectedLockedMessage(): Promise<void> {
-        await expect(
-            this.page.getByText('Sorry, this user has been locked out.')
-        ).toBeVisible();
+    async addItemsToCart(): Promise<void>{
+        await this.page.locator('button[data-test="add-to-cart-test.allthethings()-t-shirt-(red)"]').click();
+        await this.page.locator('button[data-test="add-to-cart-sauce-labs-backpack"]').click();
     }
-    async expectedNonExistentUser(): Promise<void> {
-        await expect(
-            this.page.getByText('Epic sadface: Username and password do not match any user in this service')
-        ).toBeVisible();
+    async removeItemsFromCart(): Promise<void> {
+        await this.page.locator('button[data-test="remove-sauce-labs-backpack"]').click();
+        await this.page.locator('button[data-test="remove-test.allthethings()-t-shirt-(red)"]').click();
     }
-    async closeErrorButton() : Promise<void> {
-        await this.page.locator('[data-test="error-button"]').click();
-    }
-    async logoutButton() : Promise<void>{
-        await this.page.getByRole('button', {name: 'Open Menu'}).click();
-        await this.page.locator('#logout_sidebar_link').click();
-    }
+    
 }

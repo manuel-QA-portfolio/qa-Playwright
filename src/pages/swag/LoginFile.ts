@@ -20,14 +20,12 @@ export class LoginFile {
 
     async expectedLockedMessage(): Promise<void> {
         await this.page.locator('text=Sorry, this user has been locked out.').waitFor({ state: 'visible' });
-        await expect(
-            this.page.getByText('Sorry, this user has been locked out.')
-        ).toBeVisible();
     }
     async expectedNonExistentUser(): Promise<void> {
-        await expect(
-            this.page.getByText('Epic sadface: Username and password do not match any user in this service')
-        ).toBeVisible();
+        await this.page.getByText('Epic sadface: Username and password do not match any user in this service').waitFor({
+            state
+                : 'visible'
+        })
     }
     async closeErrorButton(): Promise<void> {
         await this.page.locator('[data-test="error-button"]').click();
