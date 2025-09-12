@@ -13,9 +13,9 @@ export class CartManagement {
     }
     async backShoppingButton(): Promise<void> {
         await this.page.locator('a[data-test="shopping-cart-link"]').click();
-        await this.page.getByRole('button', {name: 'Continue Shopping'}).click();
+        await this.page.getByRole('button', { name: 'Continue Shopping' }).click();
     }
-    async addItemsToCart(): Promise<void>{
+    async addItemsToCart(): Promise<void> {
         await this.page.locator('button[data-test="add-to-cart-test.allthethings()-t-shirt-(red)"]').click();
         await this.page.locator('button[data-test="add-to-cart-sauce-labs-backpack"]').click();
     }
@@ -23,5 +23,10 @@ export class CartManagement {
         await this.page.locator('button[data-test="remove-sauce-labs-backpack"]').click();
         await this.page.locator('button[data-test="remove-test.allthethings()-t-shirt-(red)"]').click();
     }
-    
+    async addItemFromDetailItemPage(): Promise<void> {
+        await this.page.locator('a[data-test="item-2-title-link"]').click();
+        //tenemos que hacer un check del nombre del articulo en el test
+        await this.page.getByRole('button', {name: 'Add to cart'}).click();
+    }
+
 }
