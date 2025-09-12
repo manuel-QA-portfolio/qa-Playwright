@@ -69,6 +69,8 @@ npm run report
     - Avoid selector duplication
     - Make tests readable and semantic
 
+---
+
 ## ✅ Best practices applied
 - Accessible selectors (getByRole, getByLabel, data-test)
 - No hard waits (sleep()); Playwright auto-waits
@@ -78,6 +80,8 @@ npm run report
 - Fixtures for reusable page objects
 - Ready for CI/CD pipelines
 - BASE_URL configurable per environment
+
+---
 
 ## 🚀 Future Improvements
 
