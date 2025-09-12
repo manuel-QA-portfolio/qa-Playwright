@@ -1,26 +1,33 @@
 # 🚀 Playwright + TypeScript (QA Automation Demo)
 
 This repository contains an initial example of automation with **Playwright**, following the **Page Object Model (POM)** design pattern.  
-The structure is designed to keep tests **clear, maintainable, and scalable**, just like in a real QA Automation project.
+The structure is designed to keep tests **clear, maintainable, and scalable**. POM Manger, fixtures and tests are used in this repository in order to ease the upcoming tests. Basic repetitive actions have been created in the POMs in order to use them in all tests. To do that, I created a Fixture file of the POM Manager. With this method, tests only inherit from POMManagerFixture and tests can use functions from all parts of the project.
 
 ---
 
 ## 📂 Project structure
 
 ```text
-├─ src/
-│  └─ pages/               # Page Objects (POM)
-│     └─ LoginFile.ts
-│
-├─ tests/
-│  └─ swaglabs/            # Automated tests
-│     └─ loginControl.spec.ts
-│
-├─ .gitignore
-├─ package.json
-├─ playwright.config.ts
-├─ tsconfig.json
-└─ README.md
+├── src
+│   ├── core
+│   │   └── PageObjectManager.ts
+│   └── pages
+│       ├── swag
+│       │   ├── CartManagement.ts
+│       │   └── LoginFile.ts
+│       └── theinternet // Coming soon
+├── tests
+│   ├── swaglabs
+│   │   ├── cartControl.spec.ts
+│   │   ├── commonActions.spec.ts
+│   │   ├── fixtures
+│   │   │   └── pomManager.fixture.ts
+│   │   └── loginControl.spec.ts
+├── .gitignore
+├── package.json
+├── playwright.config.ts
+├── tsconfig.json
+└── README.md
 ```
 ---
 
@@ -55,33 +62,26 @@ npm run report
 ---
 
 ## 🧩 Pattern used: Page Object Model (POM)
-Page Objects are located in src/pages/.
-
-Tests import these objects from tests/swaglabs/.
-
-This allows to:
-
-Reuse code.
-
-Avoid selector duplication.
-
-Make tests more readable and semantic.
+- Page Objects are located in src/pages/
+- Tests import POMs via tests/swaglabs/fixtures/pomManager.fixture.ts
+- Advantages:
+    - Reuse code
+    - Avoid selector duplication
+    - Make tests readable and semantic
 
 ## ✅ Best practices applied
-Accessible selectors (getByRole, getByLabel, data-testid).
+- Accessible selectors (getByRole, getByLabel, data-test)
+- No hard waits (sleep()); Playwright auto-waits
+- Semantic methods (login(), addItemsToCart()) instead of raw selectors
+- Centralized configuration (playwright.config.ts)
+- TypeScript strict mode enabled
+- Fixtures for reusable page objects
+- Ready for CI/CD pipelines
+- BASE_URL configurable per environment
 
-No sleep() or hard waits → only Playwright auto-waits.
+## 🚀 Future Improvements
 
-Semantic methods (login(), open(), submit()), instead of raw selectors like click on #id123.
-
-Configuration ready for CI/CD, with BASE_URL configurable per environment.
-
-## 📌 Next steps
-Add more POMs (e.g., products page, support page).
-
-Expand the test suite.
-
-Integrate with CI/CD (GitHub Actions, GitLab CI).
-
-💡 This repository is part of my QA Automation portfolio.
-I will keep expanding it with more examples and best practices of Playwright + TypeScript.
+- Add tests for the “theinternet” page
+- Implement visual regression testing
+- Increase coverage for **edge cases**:
+    - Filter and sort functionality
