@@ -7,7 +7,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     env:
-      CI: true            # útil si en tu config haces retries condicionales por CI
+      CI: true
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -24,8 +24,11 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
-      - name: Run tests
-        run: npx playwright test
+      - name: Run tests for SauceDemo
+        run: npx playwright test --project=SauceDemo
+
+      - name: Run tests for TheInternet
+        run: npx playwright test --project=TheInternet
 
       - name: Upload HTML report
         if: always()
