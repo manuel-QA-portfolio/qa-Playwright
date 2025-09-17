@@ -1,7 +1,7 @@
-# 🚀 Playwright + TypeScript (QA Automation Demo)
+# 🚀 Playwright + TypeScript
 
-This repository contains an initial example of automation with **Playwright**, following the **Page Object Model (POM)** design pattern.  
-The structure is designed to keep tests **clear, maintainable, and scalable**. POM Manger, fixtures and tests are used in this repository in order to ease the upcoming tests. Basic repetitive actions have been created in the POMs in order to use them in all tests. To do that, I created a Fixture file of the POM Manager. With this method, tests only inherit from POMManagerFixture and tests can use functions from all parts of the project.
+This repository will reflect a starting point for automation using **Playwright**, structured with the **Page Object Model (POM) pattern**. The architecture is made to achieve clarity, ease of maintenance, and scalability in your tests. You will find a **POM manager**, a set of fixtures, and test cases configured to optimize the workflow.
+To reduce redundant code, common actions are abstracted within POMs, making them accessible across all test suites. I have also created a **dedicated fixture file for the POM manager**, so that new tests simply inherit from POMManagerFixture and gain access to utility functions for the entire project. Basically, it is designed to try to make testing as scalable and accessible as possible.
 
 ---
 
